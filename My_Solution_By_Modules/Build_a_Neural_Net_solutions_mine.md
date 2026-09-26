@@ -2,7 +2,7 @@
 
 ## Second Module: Build a Neural Net
 
-### 1. Single Neuron
+# 1. Single Neuron
 
 #### Problem
 
@@ -200,7 +200,7 @@ class Solution:
         return float(np.round(transformed, 5))
 
 ```
-### 2. Backward Pass: Computing Gradients
+# 2. Backward Pass: Computing Gradients
 
 #### Problem
 
@@ -491,7 +491,7 @@ class Solution:
 ```
 
 
-### 3. Forward and Backward Pass: Two-Layer Neural Network
+# 3. Forward and Backward Pass: Two-Layer Neural Network
 
 #### Problem
 
@@ -530,7 +530,7 @@ The function should return:
 
 ---
 
-# 1. Understand the Network First
+### 1. Understand the Network First
 
 Before looking at the code, we need to understand the shape of every object.
 
@@ -590,7 +590,7 @@ Loss
 
 ---
 
-# 2. Dimensions of Everything
+### 2. Dimensions of Everything
 
 This is one of the most important parts of the problem.
 
@@ -642,7 +642,7 @@ y_pred → (1,)
 
 ---
 
-# 3. Why Is W1 `(hidden_size, input_size)`?
+### 3. Why Is W1 `(hidden_size, input_size)`?
 
 The first layer performs:
 
@@ -703,7 +703,7 @@ $$
 
 ---
 
-# 4. First Forward Pass
+### 4. First Forward Pass
 
 The first operation is:
 
@@ -753,7 +753,7 @@ This gives one value for every hidden neuron.
 
 ---
 
-# 5. ReLU Activation
+### 5. ReLU Activation
 
 After calculating `z1`, we apply ReLU.
 
@@ -795,7 +795,7 @@ a1 = [0, 3, 0, 5]
 
 ---
 
-# 6. Why Is W2 `(output_size, hidden_size)`?
+### 6. Why Is W2 `(output_size, hidden_size)`?
 
 The second layer takes the hidden-layer output as its input.
 
@@ -854,7 +854,7 @@ $$
 
 ---
 
-# 7. Second Forward Pass
+### 7. Second Forward Pass
 
 Mathematically:
 
@@ -931,7 +931,7 @@ produce the same result for this 1D vector representation.
 
 ---
 
-# 8. Prediction
+### 8. Prediction
 
 There is no activation function after the second linear layer.
 
@@ -949,7 +949,7 @@ y_pred = z2
 
 ---
 
-# 9. MSE Loss
+### 9. MSE Loss
 
 The Mean Squared Error is:
 
@@ -982,7 +982,7 @@ loss = 0.5²
 
 ---
 
-# 10. Now Start the Backward Pass
+### 10. Now Start the Backward Pass
 
 The forward pass goes from left to right:
 
@@ -1022,7 +1022,7 @@ This is why the backward pass must be performed in this order.
 
 ---
 
-# 11. Gradient of MSE
+### 11. Gradient of MSE
 
 The loss is:
 
@@ -1068,7 +1068,7 @@ dz2 → (O,)
 
 ---
 
-# 12. Gradient of W2
+### 12. Gradient of W2
 
 The second layer is:
 
@@ -1131,7 +1131,7 @@ dw2 = np.outer(dz2, a1)
 
 ---
 
-# 13. Why `np.outer(dz2, a1)`?
+### 13. Why `np.outer(dz2, a1)`?
 
 Suppose:
 
@@ -1190,7 +1190,7 @@ dw2 = np.outer(dz2, a1)
 
 ---
 
-# 14. Why Can't We Reverse the Outer Product?
+### 14. Why Can't We Reverse the Outer Product?
 
 Suppose we write:
 
@@ -1250,7 +1250,7 @@ The gradient must have the same shape as `W2`.
 
 ---
 
-# 15. Gradient of b2
+### 15. Gradient of b2
 
 The second layer is:
 
@@ -1284,7 +1284,7 @@ db2 → (O,)
 
 ---
 
-# 16. Backpropagate to a1
+### 16. Backpropagate to a1
 
 Now we need to send the gradient backward through the second linear layer.
 
@@ -1355,7 +1355,7 @@ which follows the mathematical matrix notation more directly.
 
 ---
 
-# 17. Why Does the Gradient Go Through W2.T?
+### 17. Why Does the Gradient Go Through W2.T?
 
 This is an important rule.
 
@@ -1408,7 +1408,7 @@ General rule:
 
 ---
 
-# 18. Backpropagate Through ReLU
+### 18. Backpropagate Through ReLU
 
 We have:
 
@@ -1476,7 +1476,7 @@ So ReLU blocks the gradient for neurons whose input was not positive.
 
 ---
 
-# 19. Gradient of W1
+### 19. Gradient of W1
 
 The first layer is:
 
@@ -1541,7 +1541,7 @@ dw1 = np.outer(dz1, x)
 
 ---
 
-# 20. Why `np.outer(dz1, x)`?
+### 20. Why `np.outer(dz1, x)`?
 
 Suppose:
 
@@ -1596,7 +1596,7 @@ W1 → (3, 2)
 
 ---
 
-# 21. Why Not `np.outer(x, dz1)`?
+### 21. Why Not `np.outer(x, dz1)`?
 
 If we reverse the order:
 
@@ -1654,7 +1654,7 @@ $$
 
 ---
 
-# 22. Gradient of b1
+### 22. Gradient of b1
 
 The first layer is:
 
@@ -1688,7 +1688,7 @@ db1 → (H,)
 
 ---
 
-# 23. Complete Forward Pass
+### 23. Complete Forward Pass
 
 The complete forward pass is:
 
@@ -1751,7 +1751,7 @@ $$
 
 ---
 
-# 24. Complete Backward Pass
+### 24. Complete Backward Pass
 
 The backward pass reverses the forward operations:
 
@@ -1829,7 +1829,7 @@ $$
 
 ---
 
-# 25. Complete Dimension Flow
+### 25. Complete Dimension Flow
 
 For:
 
@@ -1911,7 +1911,7 @@ Notice how the gradients always return to the same shape as their corresponding 
 
 ---
 
-# 26. General Rule for Weight Gradients
+### 26. General Rule for Weight Gradients
 
 For a linear layer:
 
@@ -1968,7 +1968,7 @@ $$
 
 ---
 
-# 27. Why Backpropagation Uses the Reverse Order
+### 27. Why Backpropagation Uses the Reverse Order
 
 Forward propagation calculates:
 
@@ -2028,7 +2028,7 @@ This is why backpropagation is performed from the output layer toward the input 
 
 ---
 
-# 28. Complete Solution
+### 28. Complete Solution
 
 ```python
 import numpy as np
@@ -2151,9 +2151,9 @@ class Solution:
 
 ---
 
-# 29. Important Things to Remember
+### 29. Important Things to Remember
 
-### 1. Weight matrix dimensions
+#### 1. Weight matrix dimensions
 
 For a layer:
 
@@ -2179,7 +2179,7 @@ W2 → (output, hidden)
 
 ---
 
-### 2. Forward multiplication
+#### 2. Forward multiplication
 
 Always make sure the inner dimensions match.
 
@@ -2205,7 +2205,7 @@ W2 @ a1
 
 ---
 
-### 3. Backpropagation through a linear layer
+#### 3. Backpropagation through a linear layer
 
 For:
 
@@ -2225,7 +2225,7 @@ The transpose appears because we are reversing the direction of the forward matr
 
 ---
 
-### 4. Weight gradient
+#### 4. Weight gradient
 
 For:
 
@@ -2262,7 +2262,7 @@ np.outer(dz2, a1)
 
 ---
 
-### 5. Bias gradient
+#### 5. Bias gradient
 
 For:
 
@@ -2286,7 +2286,7 @@ $$
 
 ---
 
-### 6. ReLU backward pass
+#### 6. ReLU backward pass
 
 For ReLU:
 
@@ -2312,7 +2312,7 @@ dz = da * (z > 0)
 
 ---
 
-# 30. The Most Important Mental Model
+### 30. The Most Important Mental Model
 
 Think of every linear layer as:
 
@@ -2376,7 +2376,7 @@ These three equations are extremely important for understanding backpropagation 
 
 ---
 
-# Quick Cheat Sheet
+## Quick Cheat Sheet
 
 For a linear layer:
 
@@ -2450,7 +2450,7 @@ If the gradient has the wrong shape, check:
 4. Whether a transpose is required
 5. The order of the arguments in `np.outer()`
 
-### 4. Forward Pass — Multi-Layer Neural Network
+# 4. Forward Pass — Multi-Layer Neural Network
 
 #### Problem
 

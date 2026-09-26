@@ -7,7 +7,10 @@ class Solution:
         # - itos is the reverse mapping (integer to character)
         vocab=sorted(list(set(text)))
         stoi={s:i for i,s in enumerate(vocab)}
-        itos={i:s for i,s in stoi.items()}
+        itos = {
+            index: character
+            for character, index in stoi.items()
+            }
         return stoi, itos
 
     def encode(self, text: str, stoi: Dict[str, int]) -> List[int]:

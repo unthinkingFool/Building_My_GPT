@@ -35,10 +35,10 @@ class GPT(nn.Module):
         # 1. Add token embeddings + position embeddings (use torch.arange for positions)
         # 2. Pass through transformer blocks
         # 3. Apply final LayerNorm, then project to vocab_size
-        # 4. Return logits rounded to 4 decimal places (no softmax)
+        # 4. Return logits 
         
         token_embeddings=self.word_embeddings(context)
-        positions=torch.arange(context.shape[1])
+        positions=torch.arange(context.shape[1], device=context.device)
         positional_embeddings=self.positional_encoding(positions)
 
         embedded=token_embeddings+positional_embeddings
@@ -49,7 +49,7 @@ class GPT(nn.Module):
 
         logits=self.vocab_projection(embedded)
 
-        return torch.round(logits*10000)/10000
+        return logits
 
     # Do NOT modify the code below this line
     class TransformerBlock(nn.Module):
@@ -73,7 +73,7 @@ class GPT(nn.Module):
                     context_length, attention_dim = k.shape[1], k.shape[2]
                     scores = scores / (attention_dim ** 0.5)
 
-                    lower_triangular = torch.tril(torch.ones(context_length, context_length))
+                    lower_triangular = torch.tril(torch.ones(context_length, context_length ,  device=embedded.device))
                     mask = lower_triangular == 0
                     scores = scores.masked_fill(mask, float('-inf'))
                     scores = nn.functional.softmax(scores, dim = 2)

@@ -11,8 +11,8 @@ class Solution:
         # 4. Append sampled token to context with torch.cat
         # 5. Map token to character using int_to_char and accumulate result
         # Do not alter the fixed code below — it ensures reproducible test output.
-
-        generator = torch.manual_seed(0)
+        generator = torch.Generator(device=context.device)
+        generator.manual_seed(0)
         initial_state = generator.get_state()
 
         result = ""
